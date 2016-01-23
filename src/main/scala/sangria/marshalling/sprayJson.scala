@@ -1,7 +1,5 @@
 package sangria.marshalling
 
-import sangria.marshalling._
-
 import spray.json._
 
 object sprayJson extends SprayJsonSupportLowPrioImplicits {
