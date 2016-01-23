@@ -3,7 +3,7 @@ package sangria.marshalling
 import org.scalatest.{Matchers, WordSpec}
 
 import sangria.marshalling.sprayJson._
-import sangria.marshalling.testkit.{InputHandlingBehaviour, MarshallingBehaviour}
+import sangria.marshalling.testkit._
 
 import spray.json._
 
