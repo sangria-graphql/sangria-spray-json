@@ -4,7 +4,9 @@
 
 SBT Configuration:
 
-    libraryDependencies += "org.sangria-graphql" %% "sangria-spray-json" % "0.1.0"
+```scala
+libraryDependencies += "org.sangria-graphql" %% "sangria-spray-json" % "0.1.0"
+```
 
 ## License
 
