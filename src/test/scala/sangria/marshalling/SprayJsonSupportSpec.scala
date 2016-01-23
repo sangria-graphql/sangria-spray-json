@@ -53,7 +53,6 @@ class SprayJsonSupportSpec extends WordSpec with Matchers with MarshallingBehavi
     "render pretty JSON values" in {
       val rendered = SprayJsonResultMarshaller.renderPretty(toRender)
 
-      println(rendered)
       rendered.replaceAll("\r", "") should be (
         """{
           |  "a": [null, 123, [{
