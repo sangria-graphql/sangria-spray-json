@@ -13,7 +13,7 @@ libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria-marshalling-api" % "0.1.0",
   "io.spray" %%  "spray-json" % "1.3.2",
 
-  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "0.1.0" % "test",
+  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "0.1.1" % "test",
   "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
 
