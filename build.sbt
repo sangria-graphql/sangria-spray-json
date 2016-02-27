@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
   "io.spray" %%  "spray-json" % "1.3.2",
 
   "org.sangria-graphql" %% "sangria-marshalling-testkit" % "0.1.0" % "test",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
 
 git.remoteRepo := "git@github.com:sangria-graphql/sangria-spray-json.git"
