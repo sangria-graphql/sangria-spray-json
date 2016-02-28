@@ -7,7 +7,7 @@ import sangria.marshalling.testkit._
 
 import spray.json._
 
-class SprayJsonSupportSpec extends WordSpec with Matchers with MarshallingBehaviour with InputHandlingBehaviour {
+class SprayJsonSupportSpec extends WordSpec with Matchers with MarshallingBehaviour with InputHandlingBehaviour with ParsingBehaviour {
   object JsonProtocol extends DefaultJsonProtocol {
     implicit val commentFormat = jsonFormat2(Comment.apply)
     implicit val articleFormat = jsonFormat4(Article.apply)
@@ -23,6 +23,15 @@ class SprayJsonSupportSpec extends WordSpec with Matchers with MarshallingBehavi
 
     behave like `case class input unmarshaller`
     behave like `case class input marshaller` (SprayJsonResultMarshaller)
+
+    behave like `input parser` (ParseTestSubjects(
+      complex = """{"a": [null, 123, [{"foo": "bar"}]], "b": {"c": true, "d": null}}""",
+      simpleString = "\"bar\"",
+      simpleInt = "12345",
+      simpleNull = "null",
+      list = "[\"bar\", 1, null, true, [1, 2, 3]]",
+      syntaxError = List("[123, FOO BAR")
+    ))
   }
 
   val toRender = JsObject(

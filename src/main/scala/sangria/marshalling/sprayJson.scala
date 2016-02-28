@@ -2,6 +2,8 @@ package sangria.marshalling
 
 import spray.json._
 
+import scala.util.Try
+
 object sprayJson extends SprayJsonSupportLowPrioImplicits {
 
   implicit object SprayJsonResultMarshaller extends ResultMarshaller {
@@ -95,6 +97,10 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
         case e: DeserializationException ⇒ throw InputParsingError(Vector(e.msg))
       }
     }
+
+  implicit object SprayJsonInputParser extends InputParser[JsValue] {
+    def parse(str: String) = Try(str.parseJson)
+  }
 }
 
 trait SprayJsonSupportLowPrioImplicits {
