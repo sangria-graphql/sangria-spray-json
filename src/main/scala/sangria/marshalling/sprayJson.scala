@@ -8,11 +8,13 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
 
   implicit object SprayJsonResultMarshaller extends ResultMarshaller {
     type Node = JsValue
+    type MapBuilder = ArrayMapBuilder[Node]
 
-    def emptyMapNode = JsObject.empty
+    def emptyMapNode(keys: Seq[String]) = new ArrayMapBuilder[Node](keys)
+    def addMapNodeElem(builder: MapBuilder, key: String, value: Node, optional: Boolean) = builder.add(key, value)
+
+    def mapNode(builder: MapBuilder) = JsObject(builder.toMap)
     def mapNode(keyValues: Seq[(String, JsValue)]) = JsObject(keyValues: _*)
-    def addMapNodeElem(node: JsValue, key: String, value: JsValue, optional: Boolean) =
-      JsObject(node.asInstanceOf[JsObject].fields + (key → value))
 
     def arrayNode(values: Vector[JsValue]) = JsArray(values.toVector)
     def optionalArrayNodeValue(value: Option[JsValue]) = value match {

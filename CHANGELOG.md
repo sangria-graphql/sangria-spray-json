@@ -1,3 +1,7 @@
+## v0.3.0 (2016-03-24)
+
+* Updated to sangria-marshalling-api v0.2.0
+
 ## v0.2.0 (2016-02-28)
 
 * Added support for input parsing by providing an instance of `InputParser` type class
