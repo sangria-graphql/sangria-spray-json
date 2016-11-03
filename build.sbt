@@ -1,20 +1,29 @@
 name := "sangria-spray-json"
 organization := "org.sangria-graphql"
-version := "0.3.2-SNAPSHOT"
+version := "0.3.2"
 
 description := "Sangria spray-json marshalling"
 homepage := Some(url("http://sangria-graphql.org"))
 licenses := Seq("Apache License, ASL Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.0"
+crossScalaVersions := Seq("2.11.8", "2.12.0")
+
 scalacOptions ++= Seq("-deprecation", "-feature")
 
+scalacOptions ++= {
+  if (scalaVersion.value startsWith "2.12")
+    Seq.empty
+  else
+    Seq("-target:jvm-1.7")
+}
+
 libraryDependencies ++= Seq(
-  "org.sangria-graphql" %% "sangria-marshalling-api" % "0.2.1",
+  "org.sangria-graphql" %% "sangria-marshalling-api" % "0.2.2",
   "io.spray" %%  "spray-json" % "1.3.2",
 
-  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "0.2.1" % "test",
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "0.2.3" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 )
 
 git.remoteRepo := "git@github.com:sangria-graphql/sangria-spray-json.git"
