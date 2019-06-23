@@ -35,10 +35,10 @@ class SprayJsonSupportSpec extends WordSpec with Matchers with MarshallingBehavi
   }
 
   val toRender = JsObject(
-    "a" → JsArray(JsNull, JsNumber(123), JsArray(JsObject("foo" → JsString("bar")))),
-    "b" → JsObject(
-      "c" → JsBoolean(true),
-      "d" → JsNull))
+    "a" -> JsArray(JsNull, JsNumber(123), JsArray(JsObject("foo" -> JsString("bar")))),
+    "b" -> JsObject(
+      "c" -> JsBoolean(true),
+      "d" -> JsNull))
 
   "InputUnmarshaller" should {
     "throw an exception on invalid scalar values" in {
