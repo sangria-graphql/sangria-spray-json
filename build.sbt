@@ -1,29 +1,29 @@
 name := "sangria-spray-json"
 organization := "org.sangria-graphql"
-version := "1.0.2-SNAPSHOT"
+version := "1.0.3-SNAPSHOT"
 
 description := "Sangria spray-json marshalling"
 homepage := Some(url("http://sangria-graphql.org"))
 licenses := Seq("Apache License, ASL Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.12.4"
-crossScalaVersions := Seq("2.11.11", "2.12.4")
+scalaVersion := "2.13.0"
+crossScalaVersions := Seq("2.11.11", "2.12.8", scalaVersion.value)
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
 scalacOptions ++= {
-  if (scalaVersion.value startsWith "2.12")
-    Seq.empty
-  else
+  if (scalaVersion.value startsWith "2.11")
     Seq("-target:jvm-1.7")
+  else
+    Seq.empty
 }
 
 libraryDependencies ++= Seq(
-  "org.sangria-graphql" %% "sangria-marshalling-api" % "1.0.0",
-  "io.spray" %%  "spray-json" % "1.3.4",
+  "org.sangria-graphql" %% "sangria-marshalling-api" % "2.0.0-SNAPSHOT",
+  "io.spray" %%  "spray-json" % "1.3.5",
 
-  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.0.1" % "test",
-  "org.scalatest" %% "scalatest" % "3.0.4" % "test"
+  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.1.0-SNAPSHOT" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 )
 
 // Publishing
