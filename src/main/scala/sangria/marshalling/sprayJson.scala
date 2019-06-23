@@ -18,20 +18,20 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
 
     def arrayNode(values: Vector[JsValue]) = JsArray(values.toVector)
     def optionalArrayNodeValue(value: Option[JsValue]) = value match {
-      case Some(v) ⇒ v
-      case None ⇒ nullNode
+      case Some(v) => v
+      case None => nullNode
     }
 
     def scalarNode(value: Any, typeName: String, info: Set[ScalarValueInfo]) = value match {
-      case v: String ⇒ JsString(v)
-      case v: Boolean ⇒ JsBoolean(v)
-      case v: Int ⇒ JsNumber(v)
-      case v: Long ⇒ JsNumber(v)
-      case v: Float ⇒ JsNumber(v)
-      case v: Double ⇒ JsNumber(v)
-      case v: BigInt ⇒ JsNumber(v)
-      case v: BigDecimal ⇒ JsNumber(v)
-      case v ⇒ throw new IllegalArgumentException("Unsupported scalar value: " + v)
+      case v: String => JsString(v)
+      case v: Boolean => JsBoolean(v)
+      case v: Int => JsNumber(v)
+      case v: Long => JsNumber(v)
+      case v: Float => JsNumber(v)
+      case v: Double => JsNumber(v)
+      case v: BigInt => JsNumber(v)
+      case v: BigDecimal => JsNumber(v)
+      case v => throw new IllegalArgumentException("Unsupported scalar value: " + v)
     }
 
     def enumNode(value: String, typeName: String) = JsString(value)
@@ -58,10 +58,10 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
 
     def isDefined(node: JsValue) = node != JsNull
     def getScalarValue(node: JsValue) = node match {
-      case JsBoolean(b) ⇒ b
-      case JsNumber(d) ⇒ d.toBigIntExact getOrElse d
-      case JsString(s) ⇒ s
-      case _ ⇒ throw new IllegalStateException(s"$node is not a scalar value")
+      case JsBoolean(b) => b
+      case JsNumber(d) => d.toBigIntExact getOrElse d
+      case JsString(s) => s
+      case _ => throw new IllegalStateException(s"$node is not a scalar value")
     }
 
     def getScalaScalarValue(node: JsValue) = getScalarValue(node)
@@ -69,8 +69,8 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
     def isEnumNode(node: JsValue) = node.isInstanceOf[JsString]
 
     def isScalarNode(node: JsValue) = node match {
-      case _: JsBoolean | _: JsNumber | _: JsString ⇒ true
-      case _ ⇒ false
+      case _: JsBoolean | _: JsNumber | _: JsString => true
+      case _ => false
     }
 
     def isVariableNode(node: JsValue) = false
@@ -96,14 +96,14 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
 
   implicit def sprayJsonWriterToInput[T : JsonWriter]: ToInput[T, JsValue] =
     new ToInput[T, JsValue] {
-      def toInput(value: T) = implicitly[JsonWriter[T]].write(value) → SprayJsonInputUnmarshaller
+      def toInput(value: T) = implicitly[JsonWriter[T]].write(value) -> SprayJsonInputUnmarshaller
     }
 
   implicit def sprayJsonReaderFromInput[T : JsonReader]: FromInput[T] =
     new FromInput[T] {
       val marshaller = SprayJsonResultMarshaller
       def fromResult(node: marshaller.Node) = try implicitly[JsonReader[T]].read(node) catch {
-        case e: DeserializationException ⇒ throw InputParsingError(Vector(e.msg))
+        case e: DeserializationException => throw InputParsingError(Vector(e.msg))
       }
     }
 
