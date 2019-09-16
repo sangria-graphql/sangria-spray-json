@@ -1,6 +1,7 @@
 name := "sangria-spray-json"
 organization := "org.sangria-graphql"
 version := "1.0.2-SNAPSHOT"
+mimaPreviousArtifacts := Set("org.sangria-graphql" %% "sangria-spray-json" % "1.0.1")
 
 description := "Sangria spray-json marshalling"
 homepage := Some(url("http://sangria-graphql.org"))
@@ -23,7 +24,7 @@ libraryDependencies ++= Seq(
   "io.spray" %%  "spray-json" % "1.3.5",
 
   "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.0.2-SNAPSHOT" % Test,
-  "org.scalatest" %% "scalatest" % "3.0.8" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.8" % Test
 )
 
 // Publishing
