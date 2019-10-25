@@ -20,10 +20,10 @@ scalacOptions ++= {
 }
 
 libraryDependencies ++= Seq(
-  "org.sangria-graphql" %% "sangria-marshalling-api" % "1.0.4-SNAPSHOT",
+  "org.sangria-graphql" %% "sangria-marshalling-api" % "1.0.4",
   "io.spray" %%  "spray-json" % "1.3.5",
 
-  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.0.2-SNAPSHOT" % Test,
+  "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.0.2" % Test,
   "org.scalatest" %% "scalatest" % "3.0.8" % Test
 )
 
