@@ -1,6 +1,5 @@
 name := "sangria-spray-json"
 organization := "org.sangria-graphql"
-version := "1.0.2-SNAPSHOT"
 mimaPreviousArtifacts := Set("org.sangria-graphql" %% "sangria-spray-json" % "1.0.1")
 
 description := "Sangria spray-json marshalling"
@@ -28,7 +27,8 @@ libraryDependencies ++= Seq(
 )
 
 // Publishing
-
+releaseCrossBuild := true
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
 publishMavenStyle := true
 publishArtifact in Test := false
 pomIncludeRepository := (_ => false)
