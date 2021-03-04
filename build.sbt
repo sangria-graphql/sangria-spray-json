@@ -1,13 +1,18 @@
 name := "sangria-spray-json"
 organization := "org.sangria-graphql"
-mimaPreviousArtifacts := Set("org.sangria-graphql" %% "sangria-spray-json" % "1.0.1")
+mimaPreviousArtifacts := Set("org.sangria-graphql" %% "sangria-spray-json" % "1.0.2")
 
 description := "Sangria spray-json marshalling"
 homepage := Some(url("http://sangria-graphql.org"))
 licenses := Seq("Apache License, ASL Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.13.5"
-crossScalaVersions := Seq("2.12.12", scalaVersion.value)
+
+ThisBuild / crossScalaVersions := Seq("2.12.12", "2.13.5")
+ThisBuild / scalaVersion := crossScalaVersions.value.last
+ThisBuild / githubWorkflowPublishTargetBranches := List()
+ThisBuild / githubWorkflowBuildPreamble ++= List(
+  WorkflowStep.Sbt(List("mimaReportBinaryIssues"), name = Some("Check binary compatibility"))
+)
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
