@@ -11,7 +11,8 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
     type MapBuilder = ArrayMapBuilder[Node]
 
     def emptyMapNode(keys: Seq[String]) = new ArrayMapBuilder[Node](keys)
-    def addMapNodeElem(builder: MapBuilder, key: String, value: Node, optional: Boolean) = builder.add(key, value)
+    def addMapNodeElem(builder: MapBuilder, key: String, value: Node, optional: Boolean) =
+      builder.add(key, value)
 
     def mapNode(builder: MapBuilder) = JsObject(builder.toMap)
     def mapNode(keyValues: Seq[(String, JsValue)]) = JsObject(keyValues: _*)
@@ -47,19 +48,19 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
   }
 
   implicit object SprayJsonInputUnmarshaller extends InputUnmarshaller[JsValue] {
-    def getRootMapValue(node: JsValue, key: String) = node.asInstanceOf[JsObject].fields get key
+    def getRootMapValue(node: JsValue, key: String) = node.asInstanceOf[JsObject].fields.get(key)
 
     def isListNode(node: JsValue) = node.isInstanceOf[JsArray]
     def getListValue(node: JsValue) = node.asInstanceOf[JsArray].elements
 
     def isMapNode(node: JsValue) = node.isInstanceOf[JsObject]
-    def getMapValue(node: JsValue, key: String) = node.asInstanceOf[JsObject].fields get key
+    def getMapValue(node: JsValue, key: String) = node.asInstanceOf[JsObject].fields.get(key)
     def getMapKeys(node: JsValue) = node.asInstanceOf[JsObject].fields.keys
 
     def isDefined(node: JsValue) = node != JsNull
     def getScalarValue(node: JsValue) = node match {
       case JsBoolean(b) => b
-      case JsNumber(d) => d.toBigIntExact getOrElse d
+      case JsNumber(d) => d.toBigIntExact.getOrElse(d)
       case JsString(s) => s
       case _ => throw new IllegalStateException(s"$node is not a scalar value")
     }
@@ -74,7 +75,8 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
     }
 
     def isVariableNode(node: JsValue) = false
-    def getVariableName(node: JsValue) = throw new IllegalArgumentException("variables are not supported")
+    def getVariableName(node: JsValue) = throw new IllegalArgumentException(
+      "variables are not supported")
 
     def render(node: JsValue) = node.compactPrint
   }
@@ -94,15 +96,16 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
   implicit def sprayJsonFromInput[T <: JsValue]: FromInput[T] =
     SprayJsonFromInput.asInstanceOf[FromInput[T]]
 
-  implicit def sprayJsonWriterToInput[T : JsonWriter]: ToInput[T, JsValue] =
+  implicit def sprayJsonWriterToInput[T: JsonWriter]: ToInput[T, JsValue] =
     new ToInput[T, JsValue] {
       def toInput(value: T) = implicitly[JsonWriter[T]].write(value) -> SprayJsonInputUnmarshaller
     }
 
-  implicit def sprayJsonReaderFromInput[T : JsonReader]: FromInput[T] =
+  implicit def sprayJsonReaderFromInput[T: JsonReader]: FromInput[T] =
     new FromInput[T] {
       val marshaller = SprayJsonResultMarshaller
-      def fromResult(node: marshaller.Node) = try implicitly[JsonReader[T]].read(node) catch {
+      def fromResult(node: marshaller.Node) = try implicitly[JsonReader[T]].read(node)
+      catch {
         case e: DeserializationException => throw InputParsingError(Vector(e.msg))
       }
     }
