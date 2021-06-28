@@ -3,9 +3,9 @@ organization := "org.sangria-graphql"
 mimaPreviousArtifacts := Set("org.sangria-graphql" %% "sangria-spray-json" % "1.0.2")
 
 description := "Sangria spray-json marshalling"
-homepage := Some(url("http://sangria-graphql.org"))
+homepage := Some(url("https://sangria-graphql.github.io/"))
 licenses := Seq(
-  "Apache License, ASL Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
+  "Apache License, ASL Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
 
 ThisBuild / crossScalaVersions := Seq("2.12.14", "2.13.6")
 ThisBuild / scalaVersion := crossScalaVersions.value.last
@@ -15,9 +15,7 @@ ThisBuild / githubWorkflowBuildPreamble ++= List(
   WorkflowStep.Sbt(List("scalafmtCheckAll"), name = Some("Check formatting"))
 )
 
-scalacOptions ++= Seq("-deprecation", "-feature")
-
-scalacOptions += "-target:jvm-1.8"
+scalacOptions ++= Seq("-deprecation", "-feature", "-target:jvm-1.8")
 javacOptions ++= Seq("-source", "8", "-target", "8")
 
 libraryDependencies ++= Seq(
@@ -31,7 +29,7 @@ libraryDependencies ++= Seq(
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=
   Seq(RefPredicate.StartsWith(Ref.Tag("v")))
-  ThisBuild / githubWorkflowPublish := Seq(
+ThisBuild / githubWorkflowPublish := Seq(
   WorkflowStep.Sbt(
     List("ci-release"),
     env = Map(
