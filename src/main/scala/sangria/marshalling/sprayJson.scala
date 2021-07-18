@@ -26,11 +26,11 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
     def scalarNode(value: Any, typeName: String, info: Set[ScalarValueInfo]) = value match {
       case v: String => JsString(v)
       case v: Boolean => JsBoolean(v)
-      case v: Int => JsNumber(v)
-      case v: Long => JsNumber(v)
-      case v: Float => JsNumber(v)
-      case v: Double => JsNumber(v)
-      case v: BigInt => JsNumber(v)
+      case v: Int => JsNumber(BigDecimal(v))
+      case v: Long => JsNumber(BigDecimal(v))
+      case v: Float => JsNumber(BigDecimal(v.toDouble))
+      case v: Double => JsNumber(BigDecimal(v))
+      case v: BigInt => JsNumber(BigDecimal(v))
       case v: BigDecimal => JsNumber(v)
       case v => throw new IllegalArgumentException("Unsupported scalar value: " + v)
     }
