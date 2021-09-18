@@ -16,7 +16,7 @@ homepage := Some(url("https://sangria-graphql.github.io/"))
 licenses := Seq(
   "Apache License, ASL Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
 
-ThisBuild / crossScalaVersions := Seq("2.12.14", "2.13.6", "3.0.0")
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6", "3.0.0")
 ThisBuild / scalaVersion := crossScalaVersions.value.last
 ThisBuild / githubWorkflowPublishTargetBranches := List()
 ThisBuild / githubWorkflowBuildPreamble ++= List(
@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria-marshalling-api" % "1.0.6",
   ("io.spray" %% "spray-json" % "1.3.6").cross(CrossVersion.for3Use2_13),
   "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.0.4" % Test,
-  "org.scalatest" %% "scalatest" % "3.2.9" % Test
+  "org.scalatest" %% "scalatest" % "3.2.10" % Test
 )
 
 // Release
