@@ -86,7 +86,7 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
   }
 
   private object SprayJsonFromInput extends FromInput[JsValue] {
-    val marshaller = SprayJsonResultMarshaller
+    val marshaller: SprayJsonResultMarshaller.type = SprayJsonResultMarshaller
     def fromResult(node: marshaller.Node) = node
   }
 
@@ -103,7 +103,7 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
 
   implicit def sprayJsonReaderFromInput[T: JsonReader]: FromInput[T] =
     new FromInput[T] {
-      val marshaller = SprayJsonResultMarshaller
+      val marshaller: SprayJsonResultMarshaller.type = SprayJsonResultMarshaller
       def fromResult(node: marshaller.Node) = try implicitly[JsonReader[T]].read(node)
       catch {
         case e: DeserializationException => throw InputParsingError(Vector(e.msg))
@@ -116,6 +116,6 @@ object sprayJson extends SprayJsonSupportLowPrioImplicits {
 }
 
 trait SprayJsonSupportLowPrioImplicits {
-  implicit val SprayJsonInputUnmarshallerJObject =
+  implicit val SprayJsonInputUnmarshallerJObject: InputUnmarshaller[JsObject] =
     sprayJson.SprayJsonInputUnmarshaller.asInstanceOf[InputUnmarshaller[JsObject]]
 }

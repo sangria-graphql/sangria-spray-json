@@ -14,8 +14,8 @@ class SprayJsonSupportSpec
     with InputHandlingBehaviour
     with ParsingBehaviour {
   object JsonProtocol extends DefaultJsonProtocol {
-    implicit val commentFormat = jsonFormat2(Comment.apply)
-    implicit val articleFormat = jsonFormat4(Article.apply)
+    implicit val commentFormat: RootJsonFormat[Comment] = jsonFormat2(Comment.apply)
+    implicit val articleFormat: RootJsonFormat[Article] = jsonFormat4(Article.apply)
   }
 
   "SprayJson integration" should {
