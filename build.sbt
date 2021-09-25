@@ -24,7 +24,9 @@ ThisBuild / githubWorkflowBuildPreamble ++= List(
   WorkflowStep.Sbt(List("scalafmtCheckAll"), name = Some("Check formatting"))
 )
 
-scalacOptions ++= { if (isScala3.value) "-Xtarget:8" else "-target:jvm-1.8" } +: Seq("-deprecation", "-feature")
+scalacOptions ++= { if (isScala3.value) "-Xtarget:8" else "-target:jvm-1.8" } +: Seq(
+  "-deprecation",
+  "-feature")
 javacOptions ++= Seq("-source", "8", "-target", "8")
 
 libraryDependencies ++= Seq(
