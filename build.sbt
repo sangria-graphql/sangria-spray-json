@@ -33,7 +33,7 @@ libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria-marshalling-api" % "1.0.8",
   ("io.spray" %% "spray-json" % "1.3.6").cross(CrossVersion.for3Use2_13),
   "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.0.4" % Test,
-  "org.scalatest" %% "scalatest" % "3.2.13" % Test
+  "org.scalatest" %% "scalatest" % "3.2.14" % Test
 )
 
 // Release
