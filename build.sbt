@@ -30,7 +30,7 @@ scalacOptions ++= { if (isScala3.value) "-Xtarget:8" else "-target:jvm-1.8" } +:
 javacOptions ++= Seq("-source", "8", "-target", "8")
 
 libraryDependencies ++= Seq(
-  "org.sangria-graphql" %% "sangria-marshalling-api" % "1.0.8",
+  "org.sangria-graphql" %% "sangria-marshalling-api" % "1.1.2",
   ("io.spray" %% "spray-json" % "1.3.6").cross(CrossVersion.for3Use2_13),
   "org.sangria-graphql" %% "sangria-marshalling-testkit" % "1.0.4" % Test,
   "org.scalatest" %% "scalatest" % "3.2.19" % Test
